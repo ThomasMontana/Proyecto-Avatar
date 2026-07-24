@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <algorithm>
 #include <string>
-#include "dialogos.h" 
+#include "dialog.h" 
 
 int main() {
     bool continuar = true;

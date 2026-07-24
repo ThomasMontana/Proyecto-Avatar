@@ -1,0 +1,3 @@
+C:/Users/Admin/Desktop/Proyecto UM/Proyecto-Avatar/build/CMakeFiles/avatar_test.dir
+C:/Users/Admin/Desktop/Proyecto UM/Proyecto-Avatar/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Admin/Desktop/Proyecto UM/Proyecto-Avatar/build/CMakeFiles/ZERO_CHECK.dir

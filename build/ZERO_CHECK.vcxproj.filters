@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Admin\Desktop\Proyecto UM\Proyecto-Avatar\build\CMakeFiles\96f677d5fe0b407dfbcb74e92bfe132d\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{13CAADD7-6B53-374E-9CAD-4D38D94D0BEE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,29 @@
+---
+# Establece las pautas de estilo base
+BasedOnStyle: LLVM
+
+# Dialecto del lenguaje
+Language: Cpp
+Standard: c++20
+
+# Sangría y alineación
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never # Usar espacios en lugar de tabulaciones
+ColumnLimit: 100
+
+# Ubicación de las llaves en las mismas líneas que las estructuras de control (if, else, for...)
+BreakBeforeBraces: Attach
+
+# Alineación de punteros y referencias (ej. int* p vs int *p)
+PointerAlignment: Left # Resultado: int* p, std::string& str
+
+# Detalles de espacios en blanco
+SpaceAfterCStyleCast: false
+SpacesInParentheses: false
+SpaceBeforeAssignmentOperators: true
+
+# Organización de #include
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+---
