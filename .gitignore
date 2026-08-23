@@ -1,0 +1,4 @@
+build/
+*.bin
+resources/models/*.bin
+.vscode/

@@ -1,0 +1,6 @@
+build/
+resources/models/*.bin
+.git/
+.gitignore
+*.md
+external/

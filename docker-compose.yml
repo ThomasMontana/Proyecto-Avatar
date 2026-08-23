@@ -1,0 +1,35 @@
+services:
+  avatar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: avatar-virtual:latest
+    container_name: avatar_virtual
+
+    # --- Ventana (SDL2 necesita un servidor X11 del host) ---
+    environment:
+      - DISPLAY=${DISPLAY}
+      - AVATAR_RESOURCES_DIR=/app/resources
+      - PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${XDG_RUNTIME_DIR}/pulse:${XDG_RUNTIME_DIR}/pulse:rw
+      # Modelo de Whisper: se monta desde el host, no viaja en la imagen.
+      # Descargalo una vez (ver README-docker.md) y apuntá acá:
+      - ./resources/models:/app/resources/models:ro
+
+    # El socket de PulseAudio del host sólo confía en tu propio usuario,
+    # así que el contenedor tiene que correr con tu mismo UID/GID.
+    # Antes de "docker compose up" corré: export UID GID=$(id -g)
+    user: "${UID:-1000}:${GID:-1000}"
+    group_add:
+      - audio
+
+    # Descomentar para renderer acelerado por GPU en vez de software
+    # (solo funciona si el host tiene GPU con driver DRI, típico en Linux
+    # de escritorio con Mesa/Intel/AMD; sin este device, draw.cpp ya cae
+    # a software automáticamente):
+    # devices:
+    #   - /dev/dri:/dev/dri
+
+    network_mode: host
