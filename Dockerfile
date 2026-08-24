@@ -18,7 +18,7 @@ WORKDIR /build
 
 # Traer whisper.cpp fijado a un commit concreto (reproducible, no depende
 # de que el host ya tenga el submódulo clonado)
-ARG WHISPER_CPP_REF=master
+ARG WHISPER_CPP_REF=v1.9.3
 RUN git clone --depth 1 --branch ${WHISPER_CPP_REF} \
     https://github.com/ggml-org/whisper.cpp external/whisper.cpp
 
