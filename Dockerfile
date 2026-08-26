@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # =============================================================================
-# STAGE 1: builder — compila el proyecto con todas las dependencias de dev
+# STAGE 1: builder - compila el proyecto con todas las dependencias de dev
 # =============================================================================
 FROM ubuntu:24.04 AS builder
 
@@ -31,7 +31,7 @@ RUN cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
     && cmake --build build -j"$(nproc)"
 
 # =============================================================================
-# STAGE 2: runtime — solo las librerías compartidas necesarias para ejecutar
+# STAGE 2: runtime - solo las librerías compartidas necesarias para ejecutar
 # =============================================================================
 FROM ubuntu:24.04 AS runtime
 
@@ -53,7 +53,7 @@ COPY docker/asound.conf /etc/asound.conf
 # Usuario no-root: /dev/snd normalmente exige pertenecer al grupo "audio".
 # El docker-compose.yml fuerza el UID/GID del host en runtime (necesario
 # para el socket de PulseAudio), lo que pisa el UID interno de "avatar" acá
-# creado — por eso /home/avatar queda con un dueño que no coincide y
+# creado - por eso /home/avatar queda con un dueño que no coincide y
 # speech-dispatcher no puede escribir su config/caché ahí. En vez de pelear
 # con UIDs, usamos /tmp como HOME: es escribible por cualquier UID (sticky
 # bit, permisos 1777) sin importar quién termine corriendo el proceso.
