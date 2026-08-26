@@ -35,13 +35,24 @@ set(WHISPER_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 add_subdirectory(${WHISPER_DIR} whisper_build)
 
 # ---------------------------------------------------------------------------
+# Librería con la lógica pura del proyecto (sin SDL2/PortAudio/whisper), para
+# poder linkearla tanto en avatar_app como en el binario de tests unitarios
+# sin arrastrar dependencias de hardware.
+# ---------------------------------------------------------------------------
+add_library(avatar_core STATIC
+    src/util/paths.cpp
+    src/dialog/dialog.cpp
+)
+
+target_include_directories(avatar_core PUBLIC src)
+target_link_libraries(avatar_core PUBLIC nlohmann_json::nlohmann_json)
+
+# ---------------------------------------------------------------------------
 # Ejecutable principal
 # ---------------------------------------------------------------------------
 add_executable(avatar_app
     src/main.cpp
-    src/util/paths.cpp
     src/audio/audio.cpp
-    src/dialog/dialog.cpp
     src/avatar/avatar.cpp
     src/draw/draw.cpp
 )
@@ -49,10 +60,10 @@ add_executable(avatar_app
 target_include_directories(avatar_app PRIVATE src)
 
 target_link_libraries(avatar_app PRIVATE
+    avatar_core
     PkgConfig::SDL2
     PkgConfig::SDL2_IMAGE
     PkgConfig::PORTAUDIO
-    nlohmann_json::nlohmann_json
     whisper
 )
 
@@ -76,3 +87,14 @@ add_custom_command(TARGET avatar_app POST_BUILD
 # ---------------------------------------------------------------------------
 install(TARGETS avatar_app RUNTIME DESTINATION bin)
 install(DIRECTORY resources/ DESTINATION share/avatar/resources)
+
+# ---------------------------------------------------------------------------
+# Tests unitarios (opcional, ver README.md -> "Tests")
+# Off por defecto para no romper el build nativo default ni la imagen Docker,
+# que no tienen el paquete apt "catch2" instalado.
+# ---------------------------------------------------------------------------
+option(AVATAR_BUILD_TESTS "Compilar tests unitarios (requiere apt install catch2)" OFF)
+if(AVATAR_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
