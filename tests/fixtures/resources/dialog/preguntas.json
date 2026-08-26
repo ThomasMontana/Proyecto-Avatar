@@ -1,0 +1,16 @@
+{
+  "preguntas": [
+    {
+      "clave": "hola",
+      "respuesta": "Hola!"
+    },
+    {
+      "clave": "chau",
+      "respuesta": "Chau!"
+    },
+    {
+      "clave": "como estas",
+      "respuesta": "Bien, gracias."
+    }
+  ]
+}
